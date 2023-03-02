@@ -21,3 +21,27 @@ function alertSpecificName() {
     'Too many matches found. Please enter a more specific name.'
   );
 }
+
+function inputCountry() {
+  const name = refs.input.value.trim();
+  if (name === '') {
+    return (refs.countryList.innerHTML = ''), (refs.countryInfo.innerHTML = '');
+  }
+
+  fetchCountries(name)
+    .then(data => {
+      refs.countryList.innerHTML = '';
+      refs.countryInfo.innerHTML = '';
+      if (data.length === 1) {
+        refs.countryList.insertAdjacentHTML('beforeend', addCountryList(data));
+        refs.countryInfo.insertAdjacentHTML('beforeend', addCountryInfo(data));
+      } else if (data.length >= 10) {
+        alertSpecificName();
+      } else {
+        refs.countryList.insertAdjacentHTML('beforeend', addCountryList(data));
+      }
+    })
+    .catch(alertNoSuchCountry);
+}
+
+refs.input.addEventListener('input', debounce(inputCountry, DEBOUNCE_DELAY));
