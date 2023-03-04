@@ -21,7 +21,7 @@ body {
 
 .list {
   list-style: none;
-  padding: 0;
+  padding: 0 0 0 40px;
   margin: 0;
 }
 
@@ -32,4 +32,8 @@ body {
 
 .country-list__flag {
   margin-bottom: 30px;
+}
+
+.country-list {
+  padding: 0;
 }

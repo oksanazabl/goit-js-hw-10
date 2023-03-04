@@ -22,18 +22,25 @@ function alertSpecificName() {
   );
 }
 
+function clearPage() {
+  refs.countryList.innerHTML = '';
+  refs.countryInfo.innerHTML = '';
+}
+
 function inputCountry() {
   const name = refs.input.value.trim();
-  if (name === '') {
-    return (refs.countryList.innerHTML = ''), (refs.countryInfo.innerHTML = '');
+  if (!name) {
+    return clearPage();
+    // (refs.countryList.innerHTML = ''), (refs.countryInfo.innerHTML = '');
   }
 
   fetchCountries(name)
     .then(data => {
-      refs.countryList.innerHTML = '';
-      refs.countryInfo.innerHTML = '';
+      clearPage();
+      // refs.countryList.innerHTML = '';
+      // refs.countryInfo.innerHTML = '';
       if (data.length === 1) {
-        refs.countryList.insertAdjacentHTML('beforeend', addCountryList(data));
+        // refs.countryList.insertAdjacentHTML('beforeend', addCountryList(data));
         refs.countryInfo.insertAdjacentHTML('beforeend', addCountryInfo(data));
       } else if (data.length >= 10) {
         alertSpecificName();
